@@ -37,7 +37,7 @@ public class AddNoteActivity extends AppCompatActivity {
         int radioButtonId = radioGroupPriority.getCheckedRadioButtonId();
         RadioButton radioButton = findViewById(radioButtonId);
         int priority = Integer.parseInt(radioButton.getText().toString());
-        if (isFilled(title,description)) {
+        if (isFilled(title, description)) {
             Note note = new Note(title, description, dayOfWeek, priority);
             viewModel.insertNote(note);
             Intent intent = new Intent(this, MainActivity.class);
@@ -47,32 +47,7 @@ public class AddNoteActivity extends AppCompatActivity {
         }
     }
 
-    //Создаем метод, чтобы проверить все ли поля заполнены
-    private boolean isFilled (String title, String description) {
+    private boolean isFilled(String title, String description) {
         return !title.isEmpty() && !description.isEmpty();
     }
 }
-
-
-
-/*
-    private NotesDBHelper dbHelper;
-    private SQLiteDatabase database;
-
-        dbHelper = new NotesDBHelper(this);
-        database = dbHelper.getWritableDatabase();
-
-        database.insert(NotesContract.NotesEntry.TABLE_NAME, null, contentValues);
-
-        if (isFilled(title, description)) {
-            ContentValues contentValues = new ContentValues();
-            contentValues.put(NotesContract.NotesEntry.COLOMN_TITLE, title);
-            contentValues.put(NotesContract.NotesEntry.COLOMN_DESCRIPTION, description);
-            contentValues.put(NotesContract.NotesEntry.COLOMN_DAY_OF_WEEK, dayOfWeek + 1);
-            contentValues.put(NotesContract.NotesEntry.COLOMN_PRIORITY, priority);
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
-        } else {
-            Toast.makeText(this, R.string.warning_fill_fields, Toast.LENGTH_SHORT).show();
-        }
- */

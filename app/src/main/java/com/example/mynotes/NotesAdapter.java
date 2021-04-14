@@ -11,27 +11,24 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NotesAdapter extends RecyclerView.Adapter <NotesAdapter.NotesViewHolder> {
+public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHolder> {
 
-    private List <Note> notes;
-    //создаем объект нашего слушателя
+    private List<Note> notes;
     private OnNoteClickListener onNoteClickListener;
 
     public NotesAdapter(ArrayList<Note> notes) {
         this.notes = notes;
     }
 
-    // создаем интерфейс для слушателя событий
     interface OnNoteClickListener {
-        void onNoteClick (int position);
-        void onLongClick (int position);
+        void onNoteClick(int position);
+        void onLongClick(int position);
     }
-    //создаем сеттер на наш объект слушателя
+
     public void setOnNoteClickListener(OnNoteClickListener onNoteClickListener) {
         this.onNoteClickListener = onNoteClickListener;
     }
 
-    //В этом методе нам нужно взять макет, который мы создавали для каждой заметки и передать его в качестве аргумента в конструктор NotesViewHolder (он ниже).
     @NonNull
     @Override
     public NotesViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
@@ -39,10 +36,9 @@ public class NotesAdapter extends RecyclerView.Adapter <NotesAdapter.NotesViewHo
         return new NotesViewHolder(view);
     }
 
-//Этот метод принимает объект класса NotesViewHolder и порядковый номер элемента массива.
     @Override
     public void onBindViewHolder(@NonNull NotesViewHolder notesViewHolder, int i) {
-    Note note = notes.get(i);
+        Note note = notes.get(i);
         notesViewHolder.textViewTitle.setText(note.getTitle());
         notesViewHolder.textViewDescription.setText(note.getDescription());
         notesViewHolder.textViewDayOfWeek.setText(getDayAsString(note.getDayOfWeek() + 1));
@@ -73,7 +69,6 @@ public class NotesAdapter extends RecyclerView.Adapter <NotesAdapter.NotesViewHo
         private TextView textViewDescription;
         private TextView textViewDayOfWeek;
 
-
         public NotesViewHolder(@NonNull View itemView) {
             super(itemView);
             textViewTitle = itemView.findViewById(R.id.textViewTitle);
@@ -82,7 +77,7 @@ public class NotesAdapter extends RecyclerView.Adapter <NotesAdapter.NotesViewHo
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (onNoteClickListener !=null) {
+                    if (onNoteClickListener != null) {
                         onNoteClickListener.onNoteClick(getAdapterPosition());
                     }
                 }
@@ -98,6 +93,7 @@ public class NotesAdapter extends RecyclerView.Adapter <NotesAdapter.NotesViewHo
             });
         }
     }
+
     public static String getDayAsString(int position) {
         switch (position) {
             case 1:

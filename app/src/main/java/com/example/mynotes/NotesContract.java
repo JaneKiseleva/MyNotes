@@ -19,7 +19,5 @@ public class NotesContract {
                 " " + TYPE_INTEGER + ", " + COLOMN_PRIORITY + " " + TYPE_INTEGER + ")";
 
         public static final String DPOP_COMMAND = "DROP TABLE IF EXISTS " + TABLE_NAME;
-
-
     }
 }
